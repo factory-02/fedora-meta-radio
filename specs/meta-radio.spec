@@ -7,7 +7,7 @@ License:                        GPLv3
 Source10:                       icecast.xml
 Source11:                       ices.conf
 
-Requires:                       icecast ices
+Requires:                       icecast ices meta-nginx
 
 %description
 META-package for install and configure radio.
