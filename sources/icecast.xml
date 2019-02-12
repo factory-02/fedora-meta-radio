@@ -1,0 +1,106 @@
+<icecast>
+    <limits>
+        <clients>100</clients>
+        <sources>2</sources>
+        <threadpool>5</threadpool>
+        <queue-size>524288</queue-size>
+        <client-timeout>30</client-timeout>
+        <header-timeout>15</header-timeout>
+        <source-timeout>10</source-timeout>
+        <burst-on-connect>1</burst-on-connect>
+        <burst-size>65535</burst-size>
+    </limits>
+
+    <authentication>
+        <source-password></source-password>
+        <relay-password></relay-password>
+        <admin-user>root</admin-user>
+        <admin-password></admin-password>
+    </authentication>
+
+    <hostname>localhost</hostname>
+
+    <listen-socket>
+        <port>8881</port>
+        <!-- <bind-address>127.0.0.1</bind-address> -->
+    </listen-socket>
+
+    <fileserve>1</fileserve>
+
+    <paths>
+        <x-forwarded-for>127.0.0.1</x-forwarded-for>
+        <basedir>/home/apps/app_radio/domain/public_html</basedir>
+        <logdir>/home/apps/app_radio/.logs</logdir>
+        <webroot>/home/apps/app_radio/domain/public_html/web</webroot>
+        <adminroot>/home/apps/app_radio/domain/public_html/admin</adminroot>
+        <pidfile>/var/run/icecast/icecast.pid</pidfile>
+        <alias source="/" dest="/status.xsl"/>
+    </paths>
+
+    <logging>
+        <accesslog>icecast.access.log</accesslog>
+        <errorlog>icecast.error.log</errorlog>
+        <loglevel>1</loglevel>
+        <logsize>10000</logsize>
+    </logging>
+
+    <directory>
+        <yp-url-timeout>15</yp-url-timeout>
+        <yp-url>http://dir.xiph.org/cgi-bin/yp-cgi</yp-url>
+    </directory>
+
+    <security>
+        <chroot>0</chroot>
+        <changeowner>
+            <user>app_radio</user>
+            <group>app_radio</group>
+        </changeowner>
+    </security>
+
+    <location>Moscow</location>
+    <admin>info@radio.wtf</admin>
+
+    <!-- mount: live -->
+    <mount type="normal">
+        <mount-name>/live</mount-name>
+        <max-listeners>100</max-listeners>
+        <max-listener-duration>3600</max-listener-duration>
+        <intro></intro>
+        <charset>UTF8</charset>
+        <public>0</public>
+        <stream-name>Radio W.T.F. - LIVE</stream-name>
+        <stream-description>Radio W.T.F. / Stream #0 / LIVE</stream-description>
+        <stream-url>https://play.radio.wtf</stream-url>
+        <genre>misc</genre>
+        <bitrate>128</bitrate>
+        <type>application/ogg</type>
+        <subtype>vorbis</subtype>
+        <hidden>0</hidden>
+        <mp3-metadata-interval>4096</mp3-metadata-interval>
+        <password></password>
+    </mount>
+    <!-- / mount: live -->
+
+    <!-- mount: point -->
+    <mount type="normal">
+        <mount-name>/point</mount-name>
+        <max-listeners>100</max-listeners>
+        <max-listener-duration>3600</max-listener-duration>
+        <intro></intro>
+        <charset>UTF8</charset>
+        <public>0</public>
+        <stream-name>Radio W.T.F. - POINT</stream-name>
+        <stream-description>Radio W.T.F. / Stream #1 / POINT</stream-description>
+        <stream-url>https://play.radio.wtf</stream-url>
+        <genre>misc</genre>
+        <bitrate>128</bitrate>
+        <type>application/ogg</type>
+        <subtype>vorbis</subtype>
+        <hidden>0</hidden>
+        <mp3-metadata-interval>4096</mp3-metadata-interval>
+        <fallback-mount>/live</fallback-mount>
+        <fallback-override>1</fallback-override>
+        <password></password>
+    </mount>
+    <!-- / mount: point -->
+</icecast>
